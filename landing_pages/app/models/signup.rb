@@ -18,7 +18,7 @@ class Signup
   end
 
   def save
-    self.errors = ApiConnector.synchronous.for(:customer).with(self.to_hash).save.errors
+    self.errors = ApiConnector.asynchronous.for(:customer).with(self.to_hash).save.errors
     saved?
   end
 
@@ -27,8 +27,11 @@ class Signup
   end
 
   def to_hash
-    p self.email
-    {email: self.email}
+    {
+      customer: {
+        email: self.email
+      }
+    }
   end
 
   def persisted?

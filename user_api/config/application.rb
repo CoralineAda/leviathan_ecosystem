@@ -14,5 +14,6 @@ Bundler.require(:default, Rails.env)
 module UserApi
   class Application < Rails::Application
     config.autoload_paths += %W(#{config.root}/lib)
-  end
+    I18n.enforce_available_locales = false
+   end
 end

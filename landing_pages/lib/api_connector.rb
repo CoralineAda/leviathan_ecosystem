@@ -16,6 +16,7 @@ module ApiConnector
 
   class Connection
 
+    require 'bunny'
     include PoroPlus
 
     attr_accessor :klass, :object, :objects, :synchronous, :errors
@@ -41,20 +42,33 @@ module ApiConnector
     private
 
     def payload
-      payload = {customer: self.object.to_hash}
-      p payload
-      payload
+      self.object.to_hash
     end
 
     def post
-
       response = HTTParty.post("#{endpoint}.json", query: payload)
       self.errors = response.code != 200 && response.body
       self
     end
 
+    def queue_connection
+      @queue_connection ||= Bunny.new(ENV['QUEUE_HOST'])
+    end
+
+    def channel
+      @channel ||= queue_connection.create_channel
+    end
+
+    def queue
+      @queue ||= channel.queue(klass.to_s)
+    end
+
     def broadcast
-      raise "not yet implemented"
+      queue_connection.start
+      response = queue.publish(payload.to_json, :routing_key => queue.name)
+      queue_connection.close
+      Rails.logger.info("Message sent: #{payload.inspect}")
+      self
     end
 
   end
