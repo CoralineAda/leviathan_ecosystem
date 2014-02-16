@@ -3,14 +3,14 @@ class Signup
   include ActiveModel::Model
   include PoroPlus
 
-  attr_accessor :email, :first_name, :last_name, :errors
+  attr_accessor :email, :first_name, :last_name, :postal_code, :errors
 
   def valid?
-    ! self.errors.present?
+    email.present? && postal_code.present? && (self.errors.nil? || self.errors.blank?)
   end
 
   def saved?
-    valid? && self.email.present?
+    valid?
   end
 
   def new?
