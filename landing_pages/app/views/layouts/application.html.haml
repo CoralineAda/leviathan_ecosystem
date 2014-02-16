@@ -1,0 +1,24 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %title
+      Leviathan: Sign Up
+      = content_for?(:title) ? " | #{yield(:title)}" : ''
+    = stylesheet_link_tag "application"
+    = csrf_meta_tags
+  %body
+    %h1
+      Sign Up for Leviathan
+
+    .content
+      = yield
+
+    %footer
+      &copy; 2014
+      = link_to 'Coraline Ada Ehmke', 'http://bantik.github.com'
+      = ". "
+      = link_to 'GitTips appreciated!', 'https://www.gittip.com/Bantik/'
+
+    = javascript_include_tag "application"

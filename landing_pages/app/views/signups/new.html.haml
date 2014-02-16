@@ -1,0 +1,51 @@
+.content
+
+  .col
+
+    %h2
+      Brilliant.
+
+    %p
+      Cras justo odio, dapibus ac facilisis in, egestas eget quam. Curabitur blandit tempus porttitor. Curabitur blandit tempus porttitor.
+
+    %h2
+      Provocative.
+
+    %p
+      Sed posuere consectetur est at lobortis. Vestibulum id ligula porta felis euismod semper. Nullam quis risus eget urna mollis ornare vel eu leo.
+
+    %h2
+      Humble.
+
+    %p
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+    
+    %br{:style => 'clear: both;'}
+
+  .col
+
+    %h2
+      Don't Wait!
+
+    = flash[:alert]
+
+    - if flash[:alert].nil?
+
+      %p
+        To get started, sign up with your email address:
+
+      = form_for @signup, :url => signups_path do |f|
+        = f.text_field :email, :placeholder => @signup.message
+        = f.submit "Sign Up"
+
+    %h2
+      What's Next?
+      
+    %p
+      Once you've signed up, you can take the next step and 
+      = succeed "." do
+        = link_to "request a new widget", "http://service_requests.local:3002"
+
+
+    %br{:style => 'clear: both;'}
+
