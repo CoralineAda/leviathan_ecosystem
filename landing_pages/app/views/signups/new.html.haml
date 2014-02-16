@@ -32,10 +32,15 @@
     - if flash[:alert].nil?
 
       %p
-        To get started, sign up with your email address:
+        To get started, sign up below:
 
       = form_for @signup, :url => signups_path do |f|
-        = f.text_field :email, :placeholder => @signup.message
+        = f.text_field :email, :placeholder => "Email"
+        %br
+        = f.text_field :first_name, :placeholder => "First name"
+        %br
+        = f.text_field :last_name, :placeholder => "Last name"
+        %br
         = f.submit "Sign Up"
 
     %h2
@@ -44,7 +49,7 @@
     %p
       Once you've signed up, you can take the next step and 
       = succeed "." do
-        = link_to "request a new widget", "http://service_requests.local:3002"
+        = link_to "pick your free gift", "http://service_requests.local:3002"
 
 
     %br{:style => 'clear: both;'}

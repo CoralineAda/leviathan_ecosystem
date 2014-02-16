@@ -3,7 +3,7 @@ class Signup
   include ActiveModel::Model
   include PoroPlus
 
-  attr_accessor :email, :errors
+  attr_accessor :email, :first_name, :last_name, :errors
 
   def valid?
     ! self.errors.present?
@@ -29,6 +29,8 @@ class Signup
   def to_hash
     {
       customer: {
+        first_name: self.first_name,
+        last_name: self.last_name,
         email: self.email
       }
     }

@@ -7,7 +7,7 @@ class CustomerListener
   end
 
   def process(params)
-    Customer.create!(params[queue_name])
+    Customer.create_or_update_from(params[queue_name])
   end
 
 end

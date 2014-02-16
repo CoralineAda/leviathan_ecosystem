@@ -15,4 +15,9 @@ class Customer < ActiveRecord::Base
     where(converted_at: nil)
   end
 
+  def self.create_or_update_from(params)
+    return create(params) unless params[:id].present?
+    find(params.delete(:id)).update_attrbutes(params)
+  end
+
 end
