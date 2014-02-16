@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-ProductApi::Application.config.secret_key_base = '33d43116070c7e58dfb17b9547bfb88e55e21ac6285db3ae74aa4c9a0ef72372c4995ef3364e23efde26439475e673cc6e5fe5544d26296eb6040be00a81ce83'
+ProductApi::Application.config.secret_key_base = '8b5dce314136386d32b8b2894a4467944c194a1409eda4dd0505b3418d2f2d4c352302a16f59cc72f3c586f2fb49c777f9738b02c208a5536642ea508cf86481'
