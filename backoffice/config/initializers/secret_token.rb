@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Backoffice::Application.config.secret_key_base = 'a45b36c7ca3b6aaeff5b671cc911932cca12abc8b3430faa81c260aef2326a6c7f277b815f50c082bbc6105e51bab51f2683f12c801c4723c4a93a05f9007ee9'
+Backoffice::Application.config.secret_key_base = 'feb335bf813432edb52ad936ff8d646c024e46fc2222d6b1a211345d6bdc8e3b8d2f492a4373f43a51d76bf3861312bc6e7b88002edc02509c74bf5a1b822a67'

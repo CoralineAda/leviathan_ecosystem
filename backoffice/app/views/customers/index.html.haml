@@ -1,0 +1,27 @@
+.content
+
+  %h2
+    Customers
+
+  %table.striped
+    %thead
+      %tr
+        %th
+          Last Name
+        %th
+          First Name
+        %th
+          Email
+        %th
+          Converted
+    %tbody
+      - @customers.each do |customer|
+        %tr
+          %td
+            = customer.last_name
+          %td
+            = customer.first_name
+          %td
+            = customer.email
+          %td
+            = customer.converted ? "Yes" : "No"

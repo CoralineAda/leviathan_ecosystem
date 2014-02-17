@@ -36,7 +36,7 @@ module ApiConnector
     end
 
     def all
-      get(:all)
+      get_all
     end
 
     def save
@@ -49,9 +49,10 @@ module ApiConnector
       self.object.to_hash
     end
 
-    def get(what)
+    def get_all
       response = HTTParty.get("#{endpoint}.json")
-      response.code == 200 && JSON.parse(response.body[klass]) || []
+      body = JSON.parse(response.body)['response']
+      response.code == 200 && body["#{klass.to_s.pluralize}"] || []
     end
 
     def post
