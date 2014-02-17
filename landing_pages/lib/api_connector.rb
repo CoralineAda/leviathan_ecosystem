@@ -2,7 +2,8 @@ module ApiConnector
 
   def self.endpoints
     {
-      :customers => ENV['CUSTOMER_API_ENDPOINT']
+      :customers => ENV['CUSTOMER_API_ENDPOINT'],
+      :signup_todays => ENV['CUSTOMER_COUNT_API_ENDPOINT']
     }
   end
 
@@ -43,15 +44,18 @@ module ApiConnector
       self.synchronous && post || broadcast
     end
 
+    def get(what, params={})
+      param_string = URI.escape(params.collect{|k,v| "#{k}=#{v}"}.join('&'))
+      response = HTTParty.get("#{endpoint}.json?#{param_string}")
+      parsed = JSON.parse(response.body)
+      results = parsed.try(:fetch, klass, parsed)
+      response.code == 200 && results || []
+    end
+
     private
 
     def payload
       self.object.to_hash
-    end
-
-    def get(what)
-      response = HTTParty.get("#{endpoint}.json")
-      response.code == 200 && JSON.parse(response.body[klass]) || []
     end
 
     def post

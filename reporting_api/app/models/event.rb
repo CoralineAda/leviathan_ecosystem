@@ -9,5 +9,10 @@ class Event
   def self.customer_created
     where(label: "Customer Created")
   end
+
+  def self.report_created
+    where(label: "Report Created")
+  end
+  
   
 end

@@ -2,10 +2,12 @@ class TotalCustomerReport
 
   include PoroPlus
 
-  attr_accessor :start_date, :end_date, :total_customers
+  attr_accessor :start_date, :end_date
 
   def self.from(date)
-    new(start_date: date.beginning_of_day)
+    report = new(start_date: date.beginning_of_day)
+    report.log!
+    report
   end
 
   def until(date)
@@ -19,6 +21,18 @@ class TotalCustomerReport
 
   def total_customers
     events.count
+  end
+
+  def to_hash
+    {
+      kind: self.class.name.underscore.humanize.titleize,
+      start_date: self.start_date,
+      end_date: self.end_date,
+    }
+  end
+
+  def log!
+    Leviathan.devour('Report Created', to_hash)
   end
 
 end

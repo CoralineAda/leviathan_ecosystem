@@ -9,6 +9,11 @@ class Api::ReportsController < ApplicationController
     render_response Api::TotalCustomerReport.from(report)
   end
 
+  def meta
+    report = ::MetaReport.from(start_date).until(end_date)
+    render_response Api::MetaReport.from(report)
+  end
+
   private
 
   def start_date

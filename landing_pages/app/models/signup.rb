@@ -5,6 +5,11 @@ class Signup
 
   attr_accessor :email, :first_name, :last_name, :postal_code, :errors
 
+  def self.total_today
+    results = ApiConnector.synchronous.for(:signup_today).get(:one)
+    results['response'].fetch('total_customers', 2)
+  end
+
   def valid?
     email.present? && postal_code.present? && (self.errors.nil? || self.errors.blank?)
   end

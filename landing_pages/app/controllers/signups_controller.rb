@@ -2,6 +2,7 @@ class SignupsController < ApplicationController
 
   def new
     @signup ||= Signup.new(saved: params[:saved])
+    @total_signups = Signup.total_today
   end
 
   def create
