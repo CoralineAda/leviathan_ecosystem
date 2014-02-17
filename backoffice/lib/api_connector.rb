@@ -2,7 +2,8 @@ module ApiConnector
 
   def self.endpoints
     {
-      :customers => ENV['CUSTOMER_API_ENDPOINT']
+      :customers => ENV['CUSTOMER_API_ENDPOINT'],
+      :widgets   => ENV['WIDGET_API_ENDPOINT']
     }
   end
 
@@ -22,7 +23,9 @@ module ApiConnector
     attr_accessor :klass, :object, :objects, :synchronous, :errors
 
     def endpoint
-      ApiConnector.endpoints[self.klass.to_s.pluralize.to_sym]
+      endpoint = ApiConnector.endpoints[self.klass.to_s.pluralize.to_sym]
+      p endpoint
+      endpoint
     end
 
     def for(klass)
@@ -52,6 +55,7 @@ module ApiConnector
     def get_all
       response = HTTParty.get("#{endpoint}.json")
       body = JSON.parse(response.body)['response']
+      p body
       response.code == 200 && body["#{klass.to_s.pluralize}"] || []
     end
 
