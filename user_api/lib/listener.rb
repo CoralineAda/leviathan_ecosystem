@@ -7,7 +7,7 @@ module Listener
   end
 
   def connection
-    @connection ||= Bunny.new(:automatically_recover => false)
+    @connection ||= Bunny.new(:automatically_recover => true)
   end
 
   def channel
@@ -24,7 +24,7 @@ module Listener
 
   def listen!
     connection.start
-    queue.subscribe(:block => true) do |delivery_info, properties, body|
+    queue.subscribe(:block => false) do |delivery_info, properties, body|
       puts "((...)) Received from channel #{queue_name}: #{body}"
       process(JSON.parse(body))
     end
